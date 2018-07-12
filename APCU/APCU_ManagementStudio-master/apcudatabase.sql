@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2018 at 01:05 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Jul 12, 2018 at 08:48 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -113,7 +115,7 @@ CREATE TABLE `ground` (
 --
 
 INSERT INTO `ground` (`GroundID`, `Name`, `Address`, `Telephone`, `Availability`) VALUES
-(1, 'a', 'a', '6767687879', 'Not Available'),
+(1, 'a', 'sasasasa', '6767687879', 'Not Available'),
 (2, 'b', 'bb', '4565656565', 'Not Available'),
 (3, 'x', 'x', '6767687879', 'Available'),
 (4, 'q', 'qe', '1234567676', 'Available');
@@ -129,8 +131,18 @@ CREATE TABLE `loginhistory` (
   `UserID` int(11) NOT NULL,
   `Username` varchar(20) NOT NULL,
   `Type` varchar(15) NOT NULL,
-  `Date&Time` varchar(50) NOT NULL
+  `DateTime` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loginhistory`
+--
+
+INSERT INTO `loginhistory` (`RecordID`, `UserID`, `Username`, `Type`, `DateTime`) VALUES
+(1, 3, 'dinith', 'Admin', '12/07/18 23:56:49'),
+(2, 3, 'dinith', 'Admin', '12/07/18 23:58:24'),
+(3, 3, 'dinith', 'Admin', '12/07/18 23:59:36'),
+(4, 3, 'dinith', 'Admin', '13/07/18 0:17:39');
 
 -- --------------------------------------------------------
 
@@ -156,7 +168,8 @@ INSERT INTO `ppayment` (`PPaymentID`, `Position`, `PAmount`, `CMatchID`) VALUES
 (6, 'Standby Umpire', 10000, 5),
 (7, 'Umpire', 345, 5),
 (8, 'Scorer', 30, 2),
-(9, 'Scorer', 123, 11);
+(9, 'Scorer', 123, 11),
+(10, 'Umpire', 1000, 2);
 
 -- --------------------------------------------------------
 
@@ -244,11 +257,8 @@ CREATE TABLE `scorerallocation` (
 --
 
 INSERT INTO `scorerallocation` (`ScorerID`, `CMatchID`, `PPaymentStatus`, `PPaymentDate`) VALUES
-(5, 2, 'Not Settled', 'N/A'),
 (5, 11, 'Settled', '25-01-2018'),
-(6, 2, 'Not Settled', 'N/A'),
 (6, 12, 'Not Settled', 'N/A'),
-(7, 2, 'Not Settled', 'N/A'),
 (7, 3, 'Not Settled', 'N/A'),
 (8, 5, 'Settled', '15-01-2018'),
 (9, 5, 'Settled', '24-01-2018');
@@ -335,7 +345,7 @@ CREATE TABLE `umpire` (
 --
 
 INSERT INTO `umpire` (`UmpireID`, `Grade`, `Name`, `DOB`, `Address`, `Email`, `AccountNo`, `BankBranch`, `Availability`) VALUES
-(10, 'aaaa', 'Sunil Fernando', '11-06-1967', 'Colombo', 'Sunil@ymail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
+(10, 'International Panel', 'Sunil Fernando', '11-06-1967', 'Colombo', 'dinithnirman@gmail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
 (11, 'aaaa', 'Kamal Peris', '16-12-1970', 'Watthala', 'Kamal@gmail.com', '4567687987', 'Commercial Bank Colombo', 'Available'),
 (12, 'aaaa', 'Naveen De Silva', '04-06-1967', 'Gall', 'Naveen@gmail.com', '7879809097', 'People Bank Gall', 'Available'),
 (13, 'aaaa', 'Naveen De Silva', '04-06-1967', 'Gall', 'Naveen@gmail.com', '7879809097', 'People Bank Gall', 'Available'),
@@ -344,7 +354,11 @@ INSERT INTO `umpire` (`UmpireID`, `Grade`, `Name`, `DOB`, `Address`, `Email`, `A
 (16, 'aaaa', 'xxx', '11-06-1967', 'Colombo', 'Sunil@ymail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
 (17, 'aaaa', 'yyyy', '16-12-1970', 'Watthala', 'Kamal@gmail.com', '4567687987', 'Commercial Bank Colombo', 'Available'),
 (18, 'aaaa', 'vvvvv', '11-06-1967', 'Colombo', 'Sunil@ymail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
-(19, 'aaaa', 'zzzzz', '11-06-1967', 'Colombo', 'Sunil@ymail.com', '1234546576', 'Syaln Bank Negombo', 'Available');
+(19, 'aaaa', 'zzzzz', '11-06-1967', 'Colombo', 'Sunil@ymail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
+(20, 'International Panel', 'Sunil Fernando', '11-06-1967', 'Colombo', 'dinithnirman@gmail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
+(21, 'International Panel', 'Sunil Fernando', '11-06-1967', 'Colombo', 'dinithnirman@gmail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
+(22, 'International Panel', 'Sunil Fernando', '11-06-1967', 'Colombo', 'dinithnirman@gmail.com', '1234546576', 'Syaln Bank Negombo', 'Available'),
+(23, 'International Panel', 'Sunil Fernando', '11-06-1967', 'Colombo', 'dinithnirman@gmail.com', '1234546576', 'Syaln Bank Negombo', 'Available');
 
 -- --------------------------------------------------------
 
@@ -365,15 +379,18 @@ CREATE TABLE `umpireallocation` (
 --
 
 INSERT INTO `umpireallocation` (`UmpireID`, `UmpireType`, `CMatchID`, `PPaymentStatus`, `PPaymentDate`) VALUES
-(10, 'Umpire', 3, 'Not Settled', 'N/A'),
+(10, 'Third Umpire', 3, 'Not Settled', 'N/A'),
 (10, 'Umpire', 4, 'Not Settled', 'N/A'),
-(11, 'Third Umpire', 2, 'Not Settled', 'N/A'),
+(10, 'Umpire', 11, 'Not Settled', 'N/A'),
+(11, 'Umpire', 2, 'Not Settled', 'N/A'),
 (11, 'Third Umpire', 3, 'Not Settled', 'N/A'),
-(12, 'Umpire', 2, 'Not Settled', 'N/A'),
 (14, 'Third Umpire', 5, 'Settled', '22-01-2018'),
 (16, 'Umpire', 5, 'Settled', '23-01-2018'),
+(17, 'Umpire', 3, 'Not Settled', 'N/A'),
 (17, 'Third Umpire', 5, 'Not Settled', 'N/A'),
+(18, 'Umpire', 3, 'Not Settled', 'N/A'),
 (18, 'Standby Umpire', 5, 'Settled', '24-01-2018'),
+(19, 'Third Umpire', 3, 'Not Settled', 'N/A'),
 (19, 'Standby Umpire', 5, 'Not Settled', 'N/A');
 
 -- --------------------------------------------------------
@@ -406,7 +423,11 @@ INSERT INTO `umpiretelephone` (`UmpireID`, `Telephone`, `Count`) VALUES
 (17, '0112343454', 1),
 (17, '0776784562', 2),
 (18, '0118907892', 1),
-(19, '0118907892', 1);
+(19, '0118907892', 1),
+(20, '0118907892', 1),
+(21, '0118907892', 1),
+(22, '0118907892', 1),
+(23, '0118907892', 1);
 
 -- --------------------------------------------------------
 
@@ -419,7 +440,7 @@ CREATE TABLE `users` (
   `Username` varchar(20) NOT NULL,
   `Password` varchar(20) NOT NULL,
   `Type` varchar(15) NOT NULL,
-  `status` varchar(15) NOT NULL
+  `status` varchar(15) NOT NULL DEFAULT 'Active'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -427,7 +448,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Username`, `Password`, `Type`, `status`) VALUES
-(2, 'test', 'test', 'User', 'Active');
+(2, 'test', 'test', 'User', 'Active'),
+(3, 'dinith', 'dinith', 'Admin', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -542,12 +564,12 @@ ALTER TABLE `ground`
 -- AUTO_INCREMENT for table `loginhistory`
 --
 ALTER TABLE `loginhistory`
-  MODIFY `RecordID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RecordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ppayment`
 --
 ALTER TABLE `ppayment`
-  MODIFY `PPaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `PPaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `rpayment`
 --
@@ -567,12 +589,12 @@ ALTER TABLE `tournament`
 -- AUTO_INCREMENT for table `umpire`
 --
 ALTER TABLE `umpire`
-  MODIFY `UmpireID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `UmpireID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
@@ -616,6 +638,7 @@ ALTER TABLE `scorertelephone`
 --
 ALTER TABLE `umpiretelephone`
   ADD CONSTRAINT `umpiretelephoneFK` FOREIGN KEY (`UmpireID`) REFERENCES `umpire` (`UmpireID`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
