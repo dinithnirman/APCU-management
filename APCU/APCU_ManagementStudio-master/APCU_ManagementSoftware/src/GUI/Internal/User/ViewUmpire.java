@@ -6,7 +6,16 @@ import Class.MakePayment;
 import Class.Match;
 import Class.Tournament;
 import Class.Umpire;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
@@ -67,6 +76,7 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
         UTPL = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         AvailabilityL = new javax.swing.JLabel();
+        report = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TournamentMatchDetails = new javax.swing.JTable();
@@ -119,7 +129,7 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
         jLabel38 = new javax.swing.JLabel();
         SearchTypeV3 = new javax.swing.JLabel();
         Reset3 = new javax.swing.JButton();
-        SearchTypeB3 = new javax.swing.JComboBox<String>();
+        SearchTypeB3 = new javax.swing.JComboBox<>();
         SearchKeyB3 = new javax.swing.JTextField();
         SearchKeyV3 = new javax.swing.JLabel();
         Search3 = new javax.swing.JButton();
@@ -363,6 +373,17 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
                 .addGap(500, 500, 500))
         );
 
+        report.setBackground(new java.awt.Color(0, 153, 204));
+        report.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        report.setForeground(new java.awt.Color(255, 255, 255));
+        report.setText("Generate Detailed Report");
+        report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -374,6 +395,10 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(report, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,7 +406,9 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(report)
+                .addGap(8, 8, 8))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -837,7 +864,7 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
 
         SearchTypeB3.setBackground(new java.awt.Color(0, 153, 204));
         SearchTypeB3.setForeground(new java.awt.Color(255, 255, 255));
-        SearchTypeB3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select the search type", "Umpire ID", "Umpire Name", "Grade" }));
+        SearchTypeB3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select the search type", "Umpire ID", "Umpire Name", "Grade" }));
         SearchTypeB3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         SearchKeyB3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -931,7 +958,7 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("Add / UpdateRetailer");
@@ -1018,6 +1045,74 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_Search3ActionPerformed
+
+    private void reportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportActionPerformed
+        // TODO add your handling code here:
+       String SID= UIDL.getText().toString();
+       String SName=UNameL.getText().toString();
+       String SDOB= DOBL.getText().toString();
+       String SContactPerson=GradeL.getText().toString();
+       String STP= UTPL.getText().toString();
+       String SAddress=UAddressL.getText().toString();
+       String SEmail= UEmailL.getText().toString();
+       String SAccountNo=AccountNoL.getText().toString();
+       String SBankBranch= BankBranchL.getText().toString();
+       String SAvailability=AvailabilityL.getText().toString();
+       
+       if(!SID.equals("Scorer ID will appear here")){
+           try{
+            FileOutputStream out= new FileOutputStream(new File("C:\\APCU_reports\\Umpire_Details\\"+SName+"_of_"+System.currentTimeMillis()+".pdf"));
+
+               Document doc = new Document();
+
+               PdfWriter wr =PdfWriter.getInstance(doc,out);
+               doc.open();
+                    BaseFont bf =BaseFont.createFont(BaseFont.TIMES_BOLD,BaseFont.CP1252,BaseFont.EMBEDDED);
+                    Font f=new Font(bf,26);
+                    
+                    BaseFont bf1 =BaseFont.createFont(BaseFont.TIMES_ROMAN,BaseFont.CP1252,BaseFont.EMBEDDED);
+                    Font f1=new Font(bf1,18);
+                    
+               doc.add(Image.getInstance("C:\\APCU_reports\\logo.PNG"));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph("************ Detailed Report *********** ",f));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph("** Umpire ID :  "+SID,f1));
+               doc.add(new Paragraph("** Umpire Name :  "+SName,f1));
+               doc.add(new Paragraph("** Umpire Grade :  "+SContactPerson,f1));
+               doc.add(new Paragraph("** Date of Birth :  "+SDOB,f1));
+               doc.add(new Paragraph("** Contact Number :  "+STP,f1));
+               doc.add(new Paragraph("** Address :  "+SAddress,f1));
+               doc.add(new Paragraph("** E-Mail :  "+SEmail,f1));
+               doc.add(new Paragraph("** Account Number :  "+SAccountNo,f1));
+               doc.add(new Paragraph("** Bank Details :  "+SBankBranch,f1));
+               doc.add(new Paragraph("** Availability :  "+SAvailability,f1));
+
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               
+
+              doc.add(new Paragraph("                                                            ** End Of Report **"));
+
+               doc.close();
+               JOptionPane.showMessageDialog ( null, "Report generated Successfully !");
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog ( null, e);
+               
+           }
+           
+       }
+       else{
+           JOptionPane.showMessageDialog ( null, "Please select a Umpire first !");
+       }
+    }//GEN-LAST:event_reportActionPerformed
     
     //Clear validation in search form
     public void clearSearchValidation(){
@@ -1085,29 +1180,11 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
     private javax.swing.JLabel PaymentDateL;
     private javax.swing.JLabel PaymentL;
     private javax.swing.JLabel PositionL;
-    private javax.swing.JButton Reset;
-    private javax.swing.JButton Reset1;
-    private javax.swing.JButton Reset2;
     private javax.swing.JButton Reset3;
-    private javax.swing.JButton Search;
-    private javax.swing.JButton Search1;
-    private javax.swing.JButton Search2;
     private javax.swing.JButton Search3;
-    private javax.swing.JTextField SearchKeyB;
-    private javax.swing.JTextField SearchKeyB1;
-    private javax.swing.JTextField SearchKeyB2;
     private javax.swing.JTextField SearchKeyB3;
-    private javax.swing.JLabel SearchKeyV;
-    private javax.swing.JLabel SearchKeyV1;
-    private javax.swing.JLabel SearchKeyV2;
     private javax.swing.JLabel SearchKeyV3;
-    private javax.swing.JComboBox<String> SearchTypeB;
-    private javax.swing.JComboBox<String> SearchTypeB1;
-    private javax.swing.JComboBox<String> SearchTypeB2;
     private javax.swing.JComboBox<String> SearchTypeB3;
-    private javax.swing.JLabel SearchTypeV;
-    private javax.swing.JLabel SearchTypeV1;
-    private javax.swing.JLabel SearchTypeV2;
     private javax.swing.JLabel SearchTypeV3;
     private javax.swing.JLabel TAddressL;
     private javax.swing.JLabel TEmailL;
@@ -1149,12 +1226,9 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1163,7 +1237,6 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1171,9 +1244,8 @@ public class ViewUmpire extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton report;
     // End of variables declaration//GEN-END:variables
 }

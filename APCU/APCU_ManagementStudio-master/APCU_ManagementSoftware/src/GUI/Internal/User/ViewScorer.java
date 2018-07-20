@@ -6,7 +6,16 @@ import Class.MakePayment;
 import Class.Match;
 import Class.Scorer;
 import Class.Tournament;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
@@ -68,6 +77,7 @@ public class ViewScorer extends javax.swing.JInternalFrame {
         STPL = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         AvailabilityL = new javax.swing.JLabel();
+        report_button = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TournamentMatchDetails = new javax.swing.JTable();
@@ -120,7 +130,7 @@ public class ViewScorer extends javax.swing.JInternalFrame {
         jLabel32 = new javax.swing.JLabel();
         SearchTypeV = new javax.swing.JLabel();
         Reset = new javax.swing.JButton();
-        SearchTypeB = new javax.swing.JComboBox<String>();
+        SearchTypeB = new javax.swing.JComboBox<>();
         SearchKeyB = new javax.swing.JTextField();
         SearchKeyV = new javax.swing.JLabel();
         Search = new javax.swing.JButton();
@@ -278,12 +288,23 @@ public class ViewScorer extends javax.swing.JInternalFrame {
         AvailabilityL.setForeground(new java.awt.Color(51, 51, 51));
         AvailabilityL.setText("Availability will appear here");
 
+        report_button.setBackground(new java.awt.Color(0, 153, 204));
+        report_button.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        report_button.setForeground(new java.awt.Color(255, 255, 255));
+        report_button.setText("Generate Detail Report");
+        report_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        report_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,16 +318,20 @@ public class ViewScorer extends javax.swing.JInternalFrame {
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AvailabilityL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(AccountNoL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SEmailL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SAddressL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(STPL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                        .addComponent(DOBL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SNameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SIDL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BankBranchL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(AvailabilityL, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(AccountNoL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SEmailL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SAddressL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(STPL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                .addComponent(DOBL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SNameL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SIDL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BankBranchL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(report_button, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,7 +372,9 @@ public class ViewScorer extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
                     .addComponent(AvailabilityL))
-                .addGap(500, 500, 500))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(report_button)
+                .addGap(471, 471, 471))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -364,8 +391,7 @@ public class ViewScorer extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 295, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -821,7 +847,7 @@ public class ViewScorer extends javax.swing.JInternalFrame {
 
         SearchTypeB.setBackground(new java.awt.Color(0, 153, 204));
         SearchTypeB.setForeground(new java.awt.Color(255, 255, 255));
-        SearchTypeB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select the search type", "Scorer ID", "Scorer Name" }));
+        SearchTypeB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select the search type", "Scorer ID", "Scorer Name" }));
         SearchTypeB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         SearchKeyB.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1000,6 +1026,73 @@ public class ViewScorer extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void report_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_buttonActionPerformed
+        // TODO add your handling code here:
+       String SID= SIDL.getText().toString();
+       String SName=SNameL.getText().toString();
+       String SDOB= DOBL.getText().toString();
+       String SContactPerson=ContactPersonL.getText().toString();
+       String STP= STPL.getText().toString();
+       String SAddress=SAddressL.getText().toString();
+       String SEmail= SEmailL.getText().toString();
+       String SAccountNo=AccountNoL.getText().toString();
+       String SBankBranch= BankBranchL.getText().toString();
+       String SAvailability=AvailabilityL.getText().toString();
+       
+       if(!SID.equals("Scorer ID will appear here")){
+           try{
+            FileOutputStream out= new FileOutputStream(new File("C:\\APCU_reports\\Scorer_Details\\"+SName+"_of_"+System.currentTimeMillis()+".pdf"));
+
+               Document doc = new Document();
+
+               PdfWriter wr =PdfWriter.getInstance(doc,out);
+               doc.open();
+                    BaseFont bf =BaseFont.createFont(BaseFont.TIMES_BOLD,BaseFont.CP1252,BaseFont.EMBEDDED);
+                    Font f=new Font(bf,26);
+                    
+                    BaseFont bf1 =BaseFont.createFont(BaseFont.TIMES_ROMAN,BaseFont.CP1252,BaseFont.EMBEDDED);
+                    Font f1=new Font(bf1,18);
+                    
+               doc.add(Image.getInstance("C:\\APCU_reports\\logo.PNG"));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph("************ Detailed Report *********** ",f));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph("** Scorer ID :  "+SID,f1));
+               doc.add(new Paragraph("** Scorer Name :  "+SName,f1));
+               doc.add(new Paragraph("** Date of Birth :  "+SDOB,f1));
+               doc.add(new Paragraph("** Contact Number :  "+STP,f1));
+               doc.add(new Paragraph("** Address :  "+SAddress,f1));
+               doc.add(new Paragraph("** E-Mail :  "+SEmail,f1));
+               doc.add(new Paragraph("** Account Number :  "+SAccountNo,f1));
+               doc.add(new Paragraph("** Bank Details :  "+SBankBranch,f1));
+               doc.add(new Paragraph("** Availability :  "+SAvailability,f1));
+
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               doc.add(new Paragraph(" "));
+               
+
+              doc.add(new Paragraph("                                                            ** End Of Report **"));
+
+               doc.close();
+               JOptionPane.showMessageDialog ( null, "Report generated Successfully !");
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog ( null, e);
+               
+           }
+           
+       }
+       else{
+           JOptionPane.showMessageDialog ( null, "Please select a Scorer first !");
+       }
+    }//GEN-LAST:event_report_buttonActionPerformed
     
     //Clear validation in search form
     public void clearSearchValidation(){
@@ -1130,5 +1223,6 @@ public class ViewScorer extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton report_button;
     // End of variables declaration//GEN-END:variables
 }

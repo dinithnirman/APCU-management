@@ -106,11 +106,11 @@ public class Welcome_Screen extends javax.swing.JFrame {
         jLabel2.setAlignmentY(0.0F);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Copyright © 2017, JSSoft, All Rights Reserved.");
+        jLabel3.setText("Copyright © 2018, </>SourceCode, All Rights Reserved.");
 
         jLabel6.setFont(new java.awt.Font("NEOTERIC", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Click to continue");
+        jLabel6.setText("        Click to continue");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
