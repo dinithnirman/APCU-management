@@ -16,6 +16,8 @@ public class userList extends javax.swing.JInternalFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    int value;
+    
     
     public userList() {
         con = DBconnect.connect();
