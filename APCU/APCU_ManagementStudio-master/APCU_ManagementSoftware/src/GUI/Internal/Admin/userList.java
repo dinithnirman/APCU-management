@@ -144,6 +144,11 @@ public class userList extends javax.swing.JInternalFrame {
         viewReportbtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         viewReportbtn.setForeground(new java.awt.Color(255, 255, 255));
         viewReportbtn.setText("View Report");
+        viewReportbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewReportbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -194,6 +199,10 @@ public class userList extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewReportbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewReportbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewReportbtnActionPerformed
     
    
     

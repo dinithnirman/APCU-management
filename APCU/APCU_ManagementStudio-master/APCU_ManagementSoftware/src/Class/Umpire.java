@@ -448,23 +448,26 @@ public class Umpire {
     public void sending_Email(int pmatchId){
         
           try{
-           String sql="SELECT c.Date,c.Time,c.GroundID,g.Name,g.Address,u.Name,u.Email FROM cmatch c,umpire u,ground g WHERE c.CMatchID="+pmatchId+" AND u.UmpireID="+UmpireID+" AND g.GroundID=c.GroundID ";
+           String sql="SELECT c.Date,c.Time,c.GroundID,g.Name,g.Address,u.Name,u.Email,c.MatchType,c.BallType,c.LocationType  FROM cmatch c,umpire u,ground g WHERE c.CMatchID="+pmatchId+" AND u.UmpireID="+UmpireID+" AND g.GroundID=c.GroundID ";
            pst=connection.prepareStatement(sql);
            
            rs=pst.executeQuery();
            String  EMAILadd =null ;
            String EMAIL="";
            while(rs.next()){
-            EMAIL="<caption><h1><u>APCU MANAGEMENT</u></h1></caption><h2 style=\"background-color:red;\">Name : " +rs.getString(6)+"</h2><table border=5 width=100% height=100% > <tr><th>Ground Name</th><th>Type</th><th>Address</th><th>Match Date</th> <th>Time</th></tr>" ;
+            EMAIL="<caption><h1><u>APCU MANAGEMENT</u></h1></caption><h2 style=\"background-color:#C0C0C0;\">Name : " +rs.getString(6)+""
+                    + "</h2><table border=5 width=100% height=100% > <tr><th>Ground Name</th><th>Location</th><th>Address</th><th>Match Date</th>"
+                    + " <th>Time</th><th>Match Type</th><th>Ball Type</th></tr>" ;
             
-               EMAIL +="<tr> <td>" + rs.getString(4) + "</td> <td>"+rs.getString(5)+ "</td> <td>"+rs.getString(1) +"</td> <td>" +rs.getString(2)+  "</td> <td>";
+               EMAIL +="<tr> <td>" + rs.getString(4) + "</td><td>" + rs.getString(10) + "</td> <td>"+rs.getString(5)+ "</td> <td>"+rs.getString(1) +"</td> <td>" +rs.getString(2)+  "</td> <td>"+rs.getString(8) +"</td> <td>" +rs.getString(9)+  "</td></tr>";
                                          EMAILadd=rs.getString(7) ;
                
               
            }
-            EMAIL +="</table>" ;
+            EMAIL +="</table> \n" ;
+            EMAIL +="<h3>More Details, Please Contact 077-xxx xxxx</h3>";
             
-             EmailSupplierInterface ee=new  EmailSupplierInterface();
+             EmailInterface ee=new  EmailInterface();
                                           ee.generateAndSendEmail(EMAIL,EMAILadd);
 
           // else 
