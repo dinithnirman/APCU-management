@@ -68,6 +68,30 @@ public class Validation {
         return result; 
     }
     
+    // Name validation
+            public static boolean Namevalidation(String name1)
+    {
+        String name=name1.replaceAll("\\s", "");
+        if(!name.isEmpty())
+        {
+            boolean value=true ;
+             for(int i=0;i<name.length();i++)
+             {
+                 if( !Character.isAlphabetic(name.charAt(i)) || name.length()>50  )
+                  {
+           
+              
+                       JOptionPane.showMessageDialog(null, "Name format invalid it's should be Letters only ");
+                       value=false;
+                       return value;
+                  }
+        }
+            return value;
+        }
+         JOptionPane.showMessageDialog(null, "Name is Empty");
+          return false;
+    }
+    
  //Internet connection validatiom
      public static boolean InternetConnection ()
     {

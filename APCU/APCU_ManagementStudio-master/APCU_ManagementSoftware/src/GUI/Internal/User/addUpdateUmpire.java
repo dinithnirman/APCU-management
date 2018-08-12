@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import static Validation.Validation.Namevalidation;
 
 
 public class addUpdateUmpire extends javax.swing.JInternalFrame {
@@ -722,7 +723,7 @@ public class addUpdateUmpire extends javax.swing.JInternalFrame {
                 BankBranchV.setText("*Enter bank & brach");
             }
              
-        }else{
+        }else if(Namevalidation(NameB.getText())){
             validationLableReset();
             String ID;
             SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
@@ -792,7 +793,7 @@ public class addUpdateUmpire extends javax.swing.JInternalFrame {
                 BankBranchV.setText("*Enter bank & brach");
             } 
                 
-        }else{
+        }else if(Namevalidation(NameB.getText())){
             validationLableReset();
         
             SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");

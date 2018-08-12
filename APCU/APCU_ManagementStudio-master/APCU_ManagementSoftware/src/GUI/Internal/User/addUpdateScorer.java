@@ -3,6 +3,7 @@ package GUI.Internal.User;
 import Class.Function;
 import Class.Scorer;
 import Validation.Validation;
+import static Validation.Validation.Namevalidation;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
@@ -706,7 +707,7 @@ public class addUpdateScorer extends javax.swing.JInternalFrame {
                 BankBranchV.setText("*Enter bank & brach");
             }
              
-        }else{
+        }else if(Namevalidation(NameB.getText())){
             validationLableReset();
             String ID;
             SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
@@ -773,7 +774,7 @@ public class addUpdateScorer extends javax.swing.JInternalFrame {
                 BankBranchV.setText("*Enter bank & brach");
             }
              
-        }else{
+        }else if(Namevalidation(NameB.getText())){
             validationLableReset();
         
             SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
